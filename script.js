@@ -19,3 +19,32 @@ const fluxo = {
     resposta: "O problema está no aparelho. Esqueça a rede e reconecte."
   }
 };
+let passoAtual = "inicio";
+
+const perguntaEl = document.getElementById("pergunta");
+const btnSim = document.getElementById("sim");
+const btnNao = document.getElementById("nao");
+
+function mostrarPasso() {
+  const passo = fluxo[passoAtual];
+
+  if (passo.resposta) {
+    perguntaEl.textContent = passo.resposta;
+    btnSim.style.display = "none";
+    btnNao.style.display = "none";
+  } else {
+    perguntaEl.textContent = passo.pergunta;
+  }
+}
+
+btnSim.addEventListener("click", function () {
+  passoAtual = fluxo[passoAtual].sim;
+  mostrarPasso();
+});
+
+btnNao.addEventListener("click", function () {
+  passoAtual = fluxo[passoAtual].nao;
+  mostrarPasso();
+});
+
+mostrarPasso();
